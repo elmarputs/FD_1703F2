@@ -57,7 +57,10 @@ import scipy as sp
 #46 Status of graph
 #47 Active Screen
 #48 T
-#49 Mass 
+#49 Mass  
+#50 Static Pressure
+#51 Density
+#52 Equivalent airspeed
 
 def load(a):
     data = sp.io.loadmat(a)
@@ -81,5 +84,7 @@ def cal_mass(initial_mass,data,time):
             mass = mass - (data[3][1][i] + data[4][1][i])*lbs_to_kg/3600*(time[i]-time[i-1])
         l.append(mass)
     return l 
+    
+
 
                                           
