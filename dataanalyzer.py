@@ -57,6 +57,7 @@ import scipy as sp
 #46 Status of graph
 #47 Active Screen
 #48 T
+#49 Mass 
 
 def load(a):
     data = sp.io.loadmat(a)
@@ -65,5 +66,20 @@ def load(a):
     for i in range(len(flightdata)):
         value       = flightdata[i][0][0][2][0][0][0]
         measurement = flightdata[i][0][0][0][:,0] 
-        data.append([value,measurement])   
-    return data                                             
+        unit        = flightdata[i][0][0][1][0][0]
+        data.append([value,measurement,unit])   
+    return data   
+    
+def cal_mass(initial_mass,data,time):
+    l = []
+    lbs_to_kg = 0.45359237
+    mass = initial_mass
+    for i in range(len(data[0][1])):
+        if i<>(len(data[0][1])-1):
+            mass = mass - (data[3][1][i] + data[4][1][i])*lbs_to_kg/3600*(time[i+1]-time[i])
+        else: 
+            mass = mass - (data[3][1][i] + data[4][1][i])*lbs_to_kg/3600*(time[i]-time[i-1])
+        l.append(mass)
+    return l 
+
+                                          
