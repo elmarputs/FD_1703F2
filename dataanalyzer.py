@@ -61,6 +61,7 @@ import scipy as sp
 #50 Static Pressure
 #51 Density
 #52 Equivalent airspeed
+#53 Lift coefficient
 
 def load(a):
     data = sp.io.loadmat(a)
