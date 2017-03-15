@@ -32,7 +32,6 @@ def state_space2(Clr,Clda,muc,c,V,CZa,Cmadot,KY2,CXu,CXa,CZq,CZu,CX0,Cmu,Cma,Cmq
     
     
     #ASYMMETRIC FLIGHT CONDITIONS
-    
     CA1 = np.matrix( [[(CYbdot-2*mub)*b/V,0,0,0],    [0,-b/2/V,0,0],[0,0,-4*mub*KX2*b*b/2/V/V,4*mub*KXZ*b*b/2/V/V],[Cnb*b/V,0,4*mub*KXZ*b*b/2/V/V,-4*mub*KZ2*b*b/2/V/V] ])
     CA2 = np.matrix([ [CYb,Cl,CYp*b/V/2,(CYr-4*mub)*b/2/V ],[0, 0, b/V/2 , 0 ], [ Clb,0,Clp*b/2/V,Clr*b/2/V ], [ Cnb,0,Cnp*b/2/V,Cnr*b/2/V ]])
     CA3 = np.matrix( [[CYda,CYdr],[0,0],[Clda,Cldr],[Cnda,Cndr]])

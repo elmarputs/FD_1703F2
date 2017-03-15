@@ -15,7 +15,7 @@ alpha0 =    .0            # angle of attack in the stationary flight condition [
 th0    =    .0            # pitch angle in the stationary flight condition [rad]
 
 # Aircraft mass
-m      =   60500/9.805          # mass [kg]
+m      =   60500/9.806655          # mass [kg]
 
 #ARE THESE TRUE????? AS IN ASSIGNMENT THEY SAY SOMETHING ABOUT CALCULATING CDO AND OSWALD FACTOR 
 ########################################################################################################
@@ -25,6 +25,8 @@ e      =    0.8         # Oswald factor [ ]
 CD0    =   0.04          # Zero lift drag coefficient [ ]
 CLa    =   5.084          # Slope of CL-alpha curve [ ]
 
+#Aircraft mass
+m      =   60500/9.806655          # mass [kg]
 
 
 # Aircraft geometry

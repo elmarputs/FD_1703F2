@@ -92,6 +92,7 @@ def cal_mass(initial_mass,data,time):
             mass = mass - (data[3][1][i] + data[4][1][i])*lbs_to_kg/3600*(time[i]-time[i-1])
         l.append(mass)
     return l 
+
     
 
 
