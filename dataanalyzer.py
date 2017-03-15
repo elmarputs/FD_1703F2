@@ -65,8 +65,7 @@ import scipy as sp
 #54 Lift coefficient
 #55 Drag coefficient
 #56 reduced equivalent airspeed
-#57 reduced elevator deflection
-#58 ISA Temperature difference 
+#57 reduced elevator deflection 
 
 
 
