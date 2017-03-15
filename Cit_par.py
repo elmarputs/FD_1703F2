@@ -7,6 +7,7 @@ from math import *
 
 
 #STUFF I AM NOT SURE WHETHER THESE ARE THE CORRECT VALUES!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+########################################################################################################
 
 hp0    =    .0  	        # pressure altitude in the stationary flight condition [m]
 V0     =     100            # true airspeed in the stationary flight condition [m/sec]
@@ -16,7 +17,10 @@ th0    =    .0            # pitch angle in the stationary flight condition [rad]
 # Aircraft mass
 m      =   60500/9.805          # mass [kg]
 
-# aerodynamic properties
+#ARE THESE TRUE????? AS IN ASSIGNMENT THEY SAY SOMETHING ABOUT CALCULATING CDO AND OSWALD FACTOR 
+########################################################################################################
+
+# aerodynamic properties 
 e      =    0.8         # Oswald factor [ ]
 CD0    =   0.04          # Zero lift drag coefficient [ ]
 CLa    =   5.084          # Slope of CL-alpha curve [ ]
@@ -92,6 +96,7 @@ Cma    = -0.5626
 Cmadot = +0.17800
 Cmq    = -8.79415
 Cmde   = -1.1642
+Cmtc   = -0.0064
 
 CYb    = -0.7500
 CYbdot =  0     

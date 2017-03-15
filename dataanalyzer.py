@@ -57,11 +57,18 @@ import scipy as sp
 #46 Status of graph
 #47 Active Screen
 #48 T
-#49 Mass  
-#50 Static Pressure
-#51 Density
-#52 Equivalent airspeed
-#53 Lift coefficient
+#49 RAM corrected total temperature
+#50 Mass  
+#51 Static Pressure
+#52 Density
+#53 Equivalent airspeed
+#54 Lift coefficient
+#55 Drag coefficient
+#56 reduced equivalent airspeed
+#57 reduced elevator deflection
+#58 ISA Temperature difference 
+
+
 
 def load(a):
     data = sp.io.loadmat(a)
