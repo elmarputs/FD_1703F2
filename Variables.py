@@ -15,6 +15,7 @@ deg_to_rad = pi/180.
 
 
 #Standart Variables
+lambd = -0.0065
 gamma = 1.4
 rho0      = 1.225
 p0        = 101325
@@ -27,6 +28,6 @@ mfs        = 0.048
 
 #Variables that need to be calcualted
 V  = V0 
-initial_mass = 50000 / g
+initial_mass = 6255
 Tcs = 1
 Tc  = 1
