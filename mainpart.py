@@ -36,114 +36,129 @@ sys_sym, sys_asym = state_space2(CZ0,CXq,CZadot,Cnbdot,Clr,Clda,muc,c,V,CZa,Cmad
 ##############################################################################
 
 ##Control inputs to symetrical case of phugoid (step on elevator)
-
-plt.clf()
-inpu = np.concatenate((np.ones(1)*-0.005,np.zeros(99999))) 
-l = control.forced_response(sys_sym, T=np.arange(0,1000,0.01), U=inpu)
-
-plt.clf()
-plt.ticklabel_format(style='sci', axis='y', scilimits=(0,0))
-plt.xlabel("Time (s)")
-plt.ylabel("Velocity difference (m/s)")
-plt.plot(l[0],l[1][0])
-plt.savefig("V_t_phugoid")
-
-
-plt.clf()
-#plt.ylim(-0.5*10**-3,0.5*10**-3)
-plt.ticklabel_format(style='sci', axis='y', scilimits=(0,0))
-plt.xlabel("Time (s)")
-plt.ylabel("Angle of attack (rad)")
-plt.plot(l[0],l[1][1])
-plt.savefig("AOA_t_phugoid")
-
-plt.clf()
-#plt.ylim(-0.8*10**-2,0.8*10**-2)
-plt.ticklabel_format(style='sci', axis='y', scilimits=(0,0))
-plt.xlabel("Time (s)")
-plt.ylabel("Pitch angle (rad)")
-plt.plot(l[0],l[1][2])
-plt.savefig("theta_t_phugoid")
-
-plt.clf()
-plt.ticklabel_format(style='sci', axis='y', scilimits=(0,0))
-plt.xlabel("Time (s)")
-plt.ylabel("Pitch rate (rad/s)")
-#plt.ylim(-1*10**-3,1*10**-3)
-plt.plot(l[0],l[1][3])
-plt.savefig("q_t_phugoid")
-
-
-
-##Control inputs to symetrical case of short period 
-inpu = np.concatenate((np.zeros(1),np.ones(99999)*-0.005)) 
-l = control.forced_response(sys_sym, T=np.arange(0,1000,0.01), U=inpu)
-
-plt.clf()
-plt.ticklabel_format(style='sci', axis='y', scilimits=(0,0))
-plt.xlabel("Time (s)")
-plt.xlim(0,10)
-plt.ylabel("Pitch rate (rad/s)")
-plt.plot(l[0],l[1][3])
-plt.savefig("q_t_short_period")
-
-
-
-
-
+#
+#plt.clf()
+#inpu = np.concatenate((np.ones(1)*-0.005,np.zeros(99999))) 
+#l = control.forced_response(sys_sym, T=np.arange(0,1000,0.01), U=inpu)
+#
+###Phugoid
+#plt.clf()
+#plt.ticklabel_format(style='sci', axis='y', scilimits=(0,0))
+#plt.xlabel("Time (s)")
+#plt.ylabel("Velocity difference (m/s)")
+#plt.plot(l[0],l[1][0])
+#plt.savefig("V_t_phugoid")
+#
+#
+#plt.clf()
+##plt.ylim(-0.5*10**-3,0.5*10**-3)
+#plt.ticklabel_format(style='sci', axis='y', scilimits=(0,0))
+#plt.xlabel("Time (s)")
+#plt.ylabel("Angle of attack (rad)")
+#plt.plot(l[0],l[1][1])
+#plt.savefig("AOA_t_phugoid")
+#
+#plt.clf()
+##plt.ylim(-0.8*10**-2,0.8*10**-2)
+#plt.ticklabel_format(style='sci', axis='y', scilimits=(0,0))
+#plt.xlabel("Time (s)")
+#plt.ylabel("Pitch angle (rad)")
+#plt.plot(l[0],l[1][2])
+#plt.savefig("theta_t_phugoid")
+#
+#plt.clf()
+#plt.ticklabel_format(style='sci', axis='y', scilimits=(0,0))
+#plt.xlabel("Time (s)")
+#plt.ylabel("Pitch rate (rad/s)")
+##plt.ylim(-1*10**-3,1*10**-3)
+#plt.plot(l[0],l[1][3])
+#plt.savefig("q_t_phugoid")
+#
+#
+#
+###Control inputs to symetrical case of short period 
+#inpu = np.concatenate((np.zeros(1),np.ones(99999)*-0.005)) 
+#l = control.forced_response(sys_sym, T=np.arange(0,1000,0.01), U=inpu)
+#
+#plt.clf()
+#plt.ticklabel_format(style='sci', axis='y', scilimits=(0,0))
+#plt.xlabel("Time (s)")
+#plt.xlim(0,10)
+#plt.ylabel("Pitch rate (rad/s)")
+#plt.plot(l[0],l[1][3])
+#plt.savefig("q_t_short_period")
+#
+#
+#
+#
+#
+################################################################################
+#
+#
+#
+#
+#
+#
 ###############################################################################
-
-
-
-
-
-
-##############################################################################
-##############   Asymetric graphs presentation      ##########################
-##############################################################################
-
-
-##Aperiodic roll
-inpu=[]
-inpu.append(  np.concatenate((np.ones(100)*-0.025,np.zeros(99900)) ) )   #aillerion input
-inpu.append(  np.concatenate((np.ones(1)*0,np.zeros(99999)))  ) #rudder input
-l = control.forced_response(sys_asym, T=np.arange(0,1000,0.01), U=inpu)
-
-plt.clf()
-plt.ticklabel_format(style='sci', axis='y', scilimits=(0,0))
-plt.xlabel("Time (s)")
-plt.ylabel("Roll rate (rad/s)")
-plt.ylim(-1*10**-2,0.07)
-plt.xlim(0,15)
-plt.plot(l[0],l[1][2])
-plt.savefig("p_t_aperiodic")
-
-##Dutch roll
-inpu=[]
-inpu.append(  np.concatenate((np.zeros(100)*-0.025,np.zeros(99900)) ) )   #aillerion input
-inpu.append(  np.concatenate((np.zeros(1)*0,np.zeros(99999)))  ) #rudder input
-l = control.forced_response(sys_asym, T=np.arange(0,1000,0.01), U=inpu,X0=[pi/4,0,0,0])
-
-plt.clf()
-plt.ticklabel_format(style='sci', axis='y', scilimits=(0,0))
-plt.xlabel("Time (s)")
-plt.ylabel("Sideslip angle (rad)")
-plt.ylim(-0.5,0.9)
-plt.xlim(0,15)
-plt.plot(l[0],l[1][0])
-plt.savefig("sideslip_dutch_roll")
-
-plt.clf()
-plt.ticklabel_format(style='sci', axis='y', scilimits=(0,0))
-plt.xlabel("Time (s)")
-plt.ylabel("Roll angle (rad)")
-plt.ylim(-0.5,0.9)
-plt.xlim(0,15)
-plt.plot(l[0],l[1][1])
-plt.savefig("roll_dutch_roll")
-
-
-
+###############   Asymetric graphs presentation      ##########################
+###############################################################################
+#
+#
+###Aperiodic roll : impulse input on ailleron 
+#inpu=[]
+#inpu.append(  np.concatenate((np.ones(100)*-0.025,np.zeros(99900)) ) )   #aillerion input
+#inpu.append(  np.concatenate((np.ones(1)*0,np.zeros(99999)))  ) #rudder input
+#l = control.forced_response(sys_asym, T=np.arange(0,1000,0.01), U=inpu)
+#
+#plt.clf()
+#plt.ticklabel_format(style='sci', axis='y', scilimits=(0,0))
+#plt.xlabel("Time (s)")
+#plt.ylabel("Roll rate (rad/s)")
+#plt.ylim(-1*10**-2,0.07)
+#plt.xlim(0,15)
+#plt.plot(l[0],l[1][2])
+#plt.savefig("p_t_aperiodic")
+#
+###Dutch roll : inital yaw angle
+#inpu=[]
+#inpu.append(  np.concatenate((np.zeros(100)*-0.025,np.zeros(99900)) ) )   
+#inpu.append(  np.concatenate((np.zeros(1)*0,np.zeros(99999)))  ) 
+#l = control.forced_response(sys_asym, T=np.arange(0,1000,0.01), U=inpu,X0=[pi/4,0,0,0])
+#
+#plt.clf()
+#plt.ticklabel_format(style='sci', axis='y', scilimits=(0,0))
+#plt.xlabel("Time (s)")
+#plt.ylabel("Sideslip angle (rad)")
+#plt.ylim(-0.5,0.9)
+#plt.xlim(0,15)
+#plt.plot(l[0],l[1][0])
+#plt.savefig("sideslip_dutch_roll")
+#
+#plt.clf()
+#plt.ticklabel_format(style='sci', axis='y', scilimits=(0,0))
+#plt.xlabel("Time (s)")
+#plt.ylabel("Roll angle (rad)")
+#plt.ylim(-0.5,0.9)
+#plt.xlim(0,15)
+#plt.plot(l[0],l[1][1])
+#plt.savefig("roll_dutch_roll")
+#
+###Spiral : set inital roll angle
+#inpu = []
+#inpu.append(  np.concatenate((np.zeros(100)*0.0,np.zeros(99900)) ) )   #aillerion input
+#inpu.append(  np.concatenate((np.zeros(1)*0,np.zeros(99999)))  ) #rudder input
+#l = control.forced_response(sys_asym, T=np.arange(0,1000,0.01), U=inpu, X0=[0,pi/4,0,0])
+#
+#plt.clf()
+#plt.ticklabel_format(style="sci",axis="y",scilimits=(0,0))
+#plt.xlabel("Time (s)")
+#plt.ylabel("Roll angle (rad)")
+#plt.ylim(0.7,1)
+#plt.xlim(0,15)
+#plt.plot(l[0],l[1][1])
+#plt.savefig("roll_angle_spiral")
+#
+#
 
 ###############################################################################
 
@@ -175,7 +190,7 @@ data.append(["Reduced elevator deflection", np.multiply(data[17][1],deg_to_rad) 
 
 
 
-
+print np.add(data[20][1], - data[20][1][0])
 
 ###############################################################################
 
