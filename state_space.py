@@ -16,13 +16,11 @@ import control
  
 
 
-def state_space2(Clr,Clda,muc,c,V,CZa,Cmadot,KY2,CXu,CXa,CZq,CZu,CX0,Cmu,Cma,Cmq,CXde,CZde,Cmde,CYbdot,b,mub,KX2,KXZ,KZ2,CYb,Cl,CYp,CYr,Clb,Clp,Cnb,Cnp,Cnr,CYda,Cldr,Cnda,Cndr,CYdr):
+def state_space2(CZ0,CXq,CZadot,Cnbdot,Clr,Clda,muc,c,V,CZa,Cmadot,KY2,CXu,CXa,CZq,CZu,CX0,Cmu,Cma,Cmq,CXde,CZde,Cmde,CYbdot,b,mub,KX2,KXZ,KZ2,CYb,Cl,CYp,CYr,Clb,Clp,Cnb,Cnp,Cnr,CYda,Cldr,Cnda,Cndr,CYdr):
     #SYMETRIC FLIGHT CONDITIONS
-    
-    CS1 = np.matrix( [[-2*muc*c/V/V,0,0,0],    [0,(CZa-2*muc)*c/V,0,0],[0,0,-c/V,0],[0,Cmadot*c/V,0,-2*muc*KY2*c*c/V/V] ])
-    CS2 = np.matrix([ [CXu/V,CXa,CZq,CXu*c/V ],[CZu/V, CZa, -CX0 , c/V*(CZq+2*muc) ], [ 0,0,0,c/V ], [ Cmu/V,Cma,0,Cmq*c/V ]])
-    CS3 = np.matrix( [[CXde],[CZde],[0],[Cmde]])
-    
+    CS1 = np.matrix( [[-2*muc*c/V/V,0,0,0],    [0,(CZadot-2*muc)*c/V,0,0],[0,0,-c/V,0],[0,Cmadot*c/V,0,-2*muc*KY2*c*c/V/V] ])
+    CS2 = np.matrix([ [CXu/V,CXa,CZ0,CXq*c/V ],[CZu/V, CZa, -CX0 , c/V*(CZq+2*muc) ], [ 0,0,0,c/V ], [ Cmu/V,Cma,0,Cmq*c/V ]])
+    CS3 = np.matrix( [[CXde],[CZde],[0],[Cmde]])  
     A_s = -CS1**(-1)*CS2
     B_s = -CS1**(-1)*CS3
     C_s = np.matrix([ [1,0,0,0 ],[0,1,0,0 ], [ 0,0,1,0 ], [ 0,0,0,1 ]])

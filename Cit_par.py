@@ -10,15 +10,12 @@ from math import *
 ########################################################################################################
 
 hp0    =    .0  	        # pressure altitude in the stationary flight condition [m]
-V0     =     100            # true airspeed in the stationary flight condition [m/sec]
+V0     =     57            # true airspeed in the stationary flight condition [m/sec]
 alpha0 =    .0            # angle of attack in the stationary flight condition [rad]
 th0    =    .0            # pitch angle in the stationary flight condition [rad]
 
 # Aircraft mass
 m      =   60500/9.806655          # mass [kg]
-
-#ARE THESE TRUE????? AS IN ASSIGNMENT THEY SAY SOMETHING ABOUT CALCULATING CDO AND OSWALD FACTOR 
-########################################################################################################
 
 # aerodynamic properties 
 e      =    0.8         # Oswald factor [ ]
@@ -119,3 +116,5 @@ Cnp    =  -0.0602
 Cnr    =  -0.2061
 Cnda   =  -0.0120
 Cndr   =  -0.0939
+
+
