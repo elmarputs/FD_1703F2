@@ -28,7 +28,7 @@ sys_sym, sys_asym = state_space2(CZ0,CXq,CZadot,Cnbdot,Clr,Clda,muc,c,V,CZa,Cmad
                                  mub,KX2,KXZ,KZ2,CYb,CL,CYp,CYr,Clb,Clp,Cnb,
                                  Cnp,Cnr,CYda,Cldr,Cnda,Cndr,CYdr)
 #outputs of symetrical case : 0 velocity 1 angle of attack 2 pitch angle 3 pitch rate 
-#outputs of asymetrical case: 
+#outputs of asymetrical case: 0 slip     1 roll            3 roll rate   4 yaw rate
 
 
 ##############################################################################
@@ -157,7 +157,7 @@ sys_sym, sys_asym = state_space2(CZ0,CXq,CZadot,Cnbdot,Clr,Clda,muc,c,V,CZa,Cmad
 #plt.xlim(0,15)
 #plt.plot(l[0],l[1][1])
 #plt.savefig("roll_angle_spiral")
-#
+
 #
 
 ###############################################################################
@@ -191,16 +191,35 @@ data.append(["Reduced elevator deflection", np.multiply(data[17][1],deg_to_rad) 
 ##############   Validation     ##################################
 ##############################################################################
 
-
-
-
-###Short period#################################################3
+##############Phugoid######################################################
+#index = time_to_index(1,05,15)
+#sys_sym, sys_asym = state_space2( (-data[50][1][index] * g * cos(data[22][1][index]*deg_to_rad) / (0.5 * data[52][1][index] * (data[42][1][index]*knots_to_ms) ** 2 * S)),CXq,CZadot,Cnbdot,Clr,Clda,data[50][1][index] / (data[52][1][index] * S * c),c,data[42][1][index]*knots_to_ms,CZa,Cmadot,KY2,CXu,CXa,CZq,
+#                                 CZu,data[50][1][index]*g * sin(data[22][1][index]*deg_to_rad) / (0.5 * data[52][1][index] * (data[42][1][index]*knots_to_ms) ** 2 * S),Cmu,Cma,Cmq,CXde,CZde,Cmde,CYbdot,b,
+#                                 data[50][1][index] / (data[52][1][index] * S * b) ,KX2,KXZ,KZ2,CYb,data[54][1][index] ,CYp,CYr,Clb,Clp,Cnb,
+#                                 Cnp,Cnr,CYda,Cldr,Cnda,Cndr,CYdr)
+#plt.clf()
+##Experimental
+#plt.plot(np.divide(range(len(data[27][1][index:index+1220])),10.)        
+#                    , (data[42][1][index:index+1220] - data[42][1][index])*knots_to_ms
+#                    , label="Experimental")
+##Numerical
+#inpu = data[17][1][index:index+1220]*deg_to_rad
+#l = control.forced_response(sys_sym, T=np.arange(0,len(inpu))/10., U=-inpu,X0=[0,data[0][1][index]*deg_to_rad,data[22][1][index]*deg_to_rad,data[27][1][index]*deg_to_rad])
+#plt.ticklabel_format(style='sci', axis='y', scilimits=(0,0))
+#plt.xlabel("Time (s)")
+#plt.xlim(0,122)
+#plt.ylabel("Velocity Difference (m/s)")
+#plt.plot(l[0],l[1][0],label="Numerical")
+#plt.legend()
+#plt.savefig("phugoid_validation")
+##Short period#################################################
 #index = time_to_index(1,03,47)
 #sys_sym, sys_asym = state_space2( (-data[50][1][index] * g * cos(data[22][1][index]*deg_to_rad) / (0.5 * data[52][1][index] * (data[42][1][index]*knots_to_ms) ** 2 * S)),CXq,CZadot,Cnbdot,Clr,Clda,data[50][1][index] / (data[52][1][index] * S * c),c,data[42][1][index]*knots_to_ms,CZa,Cmadot,KY2,CXu,CXa,CZq,
 #                                 CZu,data[50][1][index]*g * sin(data[22][1][index]*deg_to_rad) / (0.5 * data[52][1][index] * (data[42][1][index]*knots_to_ms) ** 2 * S),Cmu,Cma,Cmq,CXde,CZde,Cmde,CYbdot,b,
 #                                 data[50][1][index] / (data[52][1][index] * S * b) ,KX2,KXZ,KZ2,CYb,data[54][1][index] ,CYp,CYr,Clb,Clp,Cnb,
 #                                 Cnp,Cnr,CYda,Cldr,Cnda,Cndr,CYdr)
 #plt.clf()
+#
 ##Experimental
 #plt.plot(np.divide(range(len(data[27][1][index:index+90])),10.)        
 #                    , np.multiply(data[27][1][index:index+90],deg_to_rad) 
@@ -217,27 +236,27 @@ data.append(["Reduced elevator deflection", np.multiply(data[17][1],deg_to_rad) 
 #plt.savefig("short_period_validation")
 
 ##Aperiodic roll#########################################
-index = time_to_index(1,10,46)
-sys_sym, sys_asym = state_space2( (-data[50][1][index] * g * cos(data[22][1][index]*deg_to_rad) / (0.5 * data[52][1][index] * (data[42][1][index]*knots_to_ms) ** 2 * S)),CXq,CZadot,Cnbdot,Clr,Clda,data[50][1][index] / (data[52][1][index] * S * c),c,data[42][1][index]*knots_to_ms,CZa,Cmadot,KY2,CXu,CXa,CZq,
-                                 CZu,data[50][1][index]*g * sin(data[22][1][index]*deg_to_rad) / (0.5 * data[52][1][index] * (data[42][1][index]*knots_to_ms) ** 2 * S),Cmu,Cma,Cmq,CXde,CZde,Cmde,CYbdot,b,
-                                 data[50][1][index] / (data[52][1][index] * S * b) ,KX2,KXZ,KZ2,CYb,data[54][1][index] ,CYp,CYr,Clb,Clp,Cnb,
-                                 Cnp,Cnr,CYda,Cldr,Cnda,Cndr,CYdr)
-inpu=[]
-inpu.append( data[16][1][index+53:index+300] * deg_to_rad )   #aillerion input
-inpu.append( data[18][1][index+53:index+300]  * deg_to_rad)   #rudder input
-l = control.forced_response(sys_asym, T=np.arange(0,len(inpu[0]))/10., U=inpu,X0 = [0,data[21][1][index]*deg_to_rad,data[26][1][index]*deg_to_rad,data[28][1][index]*deg_to_rad])
+#index = time_to_index(1,10,46)
+#sys_sym, sys_asym = state_space2( (-data[50][1][index] * g * cos(data[22][1][index]*deg_to_rad) / (0.5 * data[52][1][index] * (data[42][1][index]*knots_to_ms) ** 2 * S)),CXq,CZadot,Cnbdot,Clr,Clda,data[50][1][index] / (data[52][1][index] * S * c),c,data[42][1][index]*knots_to_ms,CZa,Cmadot,KY2,CXu,CXa,CZq,
+#                                 CZu,data[50][1][index]*g * sin(data[22][1][index]*deg_to_rad) / (0.5 * data[52][1][index] * (data[42][1][index]*knots_to_ms) ** 2 * S),Cmu,Cma,Cmq,CXde,CZde,Cmde,CYbdot,b,
+#                                 data[50][1][index] / (data[52][1][index] * S * b) ,KX2,KXZ,KZ2,CYb,data[54][1][index] ,CYp,CYr,Clb,Clp,Cnb,
+#                                 Cnp,Cnr,CYda,Cldr,Cnda,Cndr,CYdr)
+#inpu=[]
+#inpu.append( data[16][1][index+53:index+300] * deg_to_rad )   #aillerion input
+#inpu.append( data[18][1][index+53:index+300]  * deg_to_rad)   #rudder input
+#l = control.forced_response(sys_asym, T=np.arange(0,len(inpu[0]))/10., U=inpu,X0 = [0,data[21][1][index]*deg_to_rad,data[26][1][index]*deg_to_rad,data[28][1][index]*deg_to_rad])
+#
+#plt.clf()
+#plt.ticklabel_format(style='sci', axis='y', scilimits=(0,0))
+#plt.xlabel("Time (s)")
+#plt.ylabel("Roll rate (rad/s)")
+#plt.plot(l[0],l[1][2],label="Numerical")
+#plt.savefig("p_t_aperiodic")
+#plt.plot(    np.divide( range(len(data[26][1][index+53:index+300])),10. )  ,      data[26][1][index+53:index+300] *deg_to_rad ,label="Experimental"  )
+#plt.legend()
+#plt.savefig("aperiodic_validation")
 
-plt.clf()
-plt.ticklabel_format(style='sci', axis='y', scilimits=(0,0))
-plt.xlabel("Time (s)")
-plt.ylabel("Roll rate (rad/s)")
-plt.plot(l[0],l[1][2],label="Numerical")
-plt.savefig("p_t_aperiodic")
-plt.plot(    np.divide( range(len(data[26][1][index+53:index+300])),10. )  ,      data[26][1][index+53:index+300] *deg_to_rad ,label="Experimental"  )
-plt.legend()
-plt.savefig("aperiodic_validation")
-
-##Dutch roll#############################################
+###Dutch roll#############################################
 #index = time_to_index(1,07,47)
 #sys_sym, sys_asym = state_space2( (-data[50][1][index] * g * cos(data[22][1][index]*deg_to_rad) / (0.5 * data[52][1][index] * (data[42][1][index]*knots_to_ms) ** 2 * S)),CXq,CZadot,Cnbdot,Clr,Clda,data[50][1][index] / (data[52][1][index] * S * c),c,V,CZa,Cmadot,KY2,CXu,CXa,CZq,
 #                                 CZu,data[50][1][index]*g * sin(data[22][1][index]*deg_to_rad) / (0.5 * data[52][1][index] * (data[42][1][index]*knots_to_ms) ** 2 * S),Cmu,Cma,Cmq,CXde,CZde,Cmde,CYbdot,b,
@@ -245,23 +264,61 @@ plt.savefig("aperiodic_validation")
 #                                 Cnp,Cnr,CYda,Cldr,Cnda,Cndr,CYdr)
 #
 #plt.clf()
-#plt.plot(    np.divide( range(len(data[21][1][index:index+500])),10. )  ,      data[21][1][index:index+500] *deg_to_rad ,label="Experimental"  )
+#plt.plot(    np.divide( range(len(data[21][1][index:index+500])),10. )  ,      data[26][1][index:index+500] *deg_to_rad ,label="Experimental"  )
 #
-###Dutch roll : inital yaw angle
+##Dutch roll : Roll rate
 #inpu=[]
-#inpu.append(  np.concatenate((np.zeros(100)*-0.025,np.zeros(99900)) ) )   
-#inpu.append(  np.concatenate((np.zeros(1)*0,np.zeros(99999)))  ) 
-#l = control.forced_response(sys_asym, T=np.arange(0,1000,0.01), U=inpu,X0=[pi/4,0,0,0])
+#inpu.append( data[16][1][index:index+500] * deg_to_rad )   #aillerion input
+#inpu.append( data[18][1][index:index+500]  * deg_to_rad)   #rudder input 
+#l = control.forced_response(sys_asym, T=np.arange(0,len(inpu[0]))/10., U=inpu,X0 = [0,data[21][1][index]*deg_to_rad,data[26][1][index]*deg_to_rad,data[28][1][index]*deg_to_rad])
+#
+#plt.ticklabel_format(style='sci', axis='y', scilimits=(0,0))
+#plt.xlabel("Time (s)")
+#plt.ylabel("Roll rate (rad/s)")
+#plt.ylim(-0.5,0.9)
+#plt.plot(l[0],l[1][2],label = "Numerical")
+#plt.legend()
+#plt.savefig("dutch_roll_validation_1")
 #
 #plt.clf()
+#plt.plot(    np.divide( range(len(data[21][1][index:index+500])),10. )  ,      data[21][1][index:index+500] *deg_to_rad ,label="Experimental"  )
+#
+#inpu=[]
+#inpu.append( data[16][1][index:index+500] * deg_to_rad )   #aillerion input
+#inpu.append( data[18][1][index:index+500]  * deg_to_rad)   #rudder input 
+#l = control.forced_response(sys_asym, T=np.arange(0,len(inpu[0]))/10., U=inpu,X0 = [0,data[21][1][index]*deg_to_rad,data[26][1][index]*deg_to_rad,data[28][1][index]*deg_to_rad])
+#
 #plt.ticklabel_format(style='sci', axis='y', scilimits=(0,0))
 #plt.xlabel("Time (s)")
 #plt.ylabel("Roll angle (rad)")
-#plt.ylim(-0.5,0.9)
 #plt.xlim(0,15)
-#plt.plot(l[0],l[1][1])
-#plt.savefig("roll_dutch_roll")
+#plt.ylim(-0.5,0.9)
+#plt.plot(l[0],l[1][1],label = "Numerical")
+#plt.legend()
+#plt.savefig("dutch_roll_validation_2")
+
+###Spiral###################################################
+#index = time_to_index(1,12,54)
+#sys_sym, sys_asym = state_space2( (-data[50][1][index] * g * cos(data[22][1][index]*deg_to_rad) / (0.5 * data[52][1][index] * (data[42][1][index]*knots_to_ms) ** 2 * S)),CXq,CZadot,Cnbdot,Clr,Clda,data[50][1][index] / (data[52][1][index] * S * c),c,V,CZa,Cmadot,KY2,CXu,CXa,CZq,
+#                                 CZu,data[50][1][index]*g * sin(data[22][1][index]*deg_to_rad) / (0.5 * data[52][1][index] * (data[42][1][index]*knots_to_ms) ** 2 * S),Cmu,Cma,Cmq,CXde,CZde,Cmde,CYbdot,b,
+#                                 data[50][1][index] / (data[52][1][index] * S * b) ,KX2,KXZ,KZ2,CYb,data[54][1][index] ,CYp,CYr,Clb,Clp,Cnb,
+#                                 Cnp,Cnr,CYda,Cldr,Cnda,Cndr,CYdr)
+#plt.clf()
+#plt.plot(    np.divide( range(len(data[21][1][index:index+500])),10. )  ,      data[21][1][index:index+500]*deg_to_rad  ,label="Experimental"  )
 #
+#inpu=[]
+#inpu.append( data[16][1][index:index+500] * deg_to_rad )   #aillerion input
+#inpu.append( data[18][1][index:index+500]  * deg_to_rad)   #rudder input 
+#l = control.forced_response(sys_asym, T=np.arange(0,len(inpu[0]))/10., U=inpu,X0 = [0,data[21][1][index]*deg_to_rad,data[26][1][index]*deg_to_rad,data[28][1][index]*deg_to_rad])
+#
+#plt.ticklabel_format(style='sci', axis='y', scilimits=(0,0))
+#plt.xlabel("Time (s)")
+#plt.ylabel("Roll angle (rad)")
+#plt.plot(l[0],l[1][1],label = "Numerical")
+#plt.legend()
+#plt.savefig("spiral_validation")
+#plt.xlim(0,40)
+#plt.ylim(-0.5,0.5)
 
 
 ###############################################################################
