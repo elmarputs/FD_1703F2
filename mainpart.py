@@ -14,6 +14,7 @@ Created on Thu Mar 09 14:42:24 2017
 from Cit_par import *
 import numpy as np
 import scipy as sp
+
 import control
 import matplotlib.pyplot
 from dataanalyzer import load,cal_mass 
@@ -46,6 +47,7 @@ plt.ticklabel_format(style='sci', axis='y', scilimits=(0,0))
 plt.xlabel("Time (s)")
 plt.ylabel("Velocity difference (m/s)")
 plt.plot(l[0],l[1][0])
+plt.show()
 plt.savefig("V_t_phugoid")
 
 
