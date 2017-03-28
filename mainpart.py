@@ -14,6 +14,7 @@ Created on Thu Mar 09 14:42:24 2017
 from Cit_par import *
 import numpy as np
 import scipy as sp
+
 import control
 import matplotlib.pyplot
 from dataanalyzer import load,cal_mass, time_to_index
@@ -36,6 +37,7 @@ sys_sym, sys_asym = state_space2(CZ0,CXq,CZadot,Cnbdot,Clr,Clda,muc,c,V,CZa,Cmad
 ##############################################################################
 
 ##Control inputs to symetrical case of phugoid (step on elevator)
+<<<<<<< HEAD
 #
 #plt.clf()
 #inpu = np.concatenate((np.ones(1)*-0.005,np.zeros(99999))) 
@@ -99,6 +101,64 @@ sys_sym, sys_asym = state_space2(CZ0,CXq,CZadot,Cnbdot,Clr,Clda,muc,c,V,CZa,Cmad
 #
 #
 #
+=======
+
+plt.clf()
+inpu = np.concatenate((np.ones(1)*-0.005,np.zeros(99999))) 
+l = control.forced_response(sys_sym, T=np.arange(0,1000,0.01), U=inpu)
+
+plt.clf()
+plt.ticklabel_format(style='sci', axis='y', scilimits=(0,0))
+plt.xlabel("Time (s)")
+plt.ylabel("Velocity difference (m/s)")
+plt.plot(l[0],l[1][0])
+plt.show()
+plt.savefig("V_t_phugoid")
+
+
+plt.clf()
+#plt.ylim(-0.5*10**-3,0.5*10**-3)
+plt.ticklabel_format(style='sci', axis='y', scilimits=(0,0))
+plt.xlabel("Time (s)")
+plt.ylabel("Angle of attack (rad)")
+plt.plot(l[0],l[1][1])
+plt.savefig("AOA_t_phugoid")
+
+plt.clf()
+#plt.ylim(-0.8*10**-2,0.8*10**-2)
+plt.ticklabel_format(style='sci', axis='y', scilimits=(0,0))
+plt.xlabel("Time (s)")
+plt.ylabel("Pitch angle (rad)")
+plt.plot(l[0],l[1][2])
+plt.savefig("theta_t_phugoid")
+
+plt.clf()
+plt.ticklabel_format(style='sci', axis='y', scilimits=(0,0))
+plt.xlabel("Time (s)")
+plt.ylabel("Pitch rate (rad/s)")
+#plt.ylim(-1*10**-3,1*10**-3)
+plt.plot(l[0],l[1][3])
+plt.savefig("q_t_phugoid")
+
+
+
+##Control inputs to symetrical case of short period 
+inpu = np.concatenate((np.zeros(1),np.ones(99999)*-0.005)) 
+l = control.forced_response(sys_sym, T=np.arange(0,1000,0.01), U=inpu)
+
+plt.clf()
+plt.ticklabel_format(style='sci', axis='y', scilimits=(0,0))
+plt.xlabel("Time (s)")
+plt.xlim(0,10)
+plt.ylabel("Pitch rate (rad/s)")
+plt.plot(l[0],l[1][3])
+plt.savefig("q_t_short_period")
+
+
+
+
+
+>>>>>>> origin/master
 ###############################################################################
 ###############   Asymetric graphs presentation      ##########################
 ###############################################################################

@@ -5,7 +5,7 @@ Created on Thu Mar 09 15:13:54 2017
 @author: Chris
 """
 
-import scipy as sp
+import scipy.io as sp
 
 #gives a list with data where the following indexes correspond to 
 #0 Angle of attack
@@ -70,7 +70,7 @@ import scipy as sp
 
 
 def load(a):
-    data = sp.io.loadmat(a)
+    data = sp.loadmat(a)
     flightdata = data["flightdata"][0][0]
     data = []
     for i in range(len(flightdata)):
