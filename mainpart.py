@@ -37,7 +37,6 @@ sys_sym, sys_asym = state_space2(CZ0,CXq,CZadot,Cnbdot,Clr,Clda,muc,c,V,CZa,Cmad
 ##############################################################################
 
 ##Control inputs to symetrical case of phugoid (step on elevator)
-<<<<<<< HEAD
 #
 #plt.clf()
 #inpu = np.concatenate((np.ones(1)*-0.005,np.zeros(99999))) 
@@ -101,7 +100,6 @@ sys_sym, sys_asym = state_space2(CZ0,CXq,CZadot,Cnbdot,Clr,Clda,muc,c,V,CZa,Cmad
 #
 #
 #
-=======
 
 plt.clf()
 inpu = np.concatenate((np.ones(1)*-0.005,np.zeros(99999))) 
@@ -156,9 +154,6 @@ plt.savefig("q_t_short_period")
 
 
 
-
-
->>>>>>> origin/master
 ###############################################################################
 ###############   Asymetric graphs presentation      ##########################
 ###############################################################################
